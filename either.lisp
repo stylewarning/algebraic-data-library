@@ -13,3 +13,8 @@
   (adt:match either either-val
     ((left x) (right x))
     ((right x) (left x))))
+
+(defmethod fmap ((f function) (val either))
+  (adt:match either val
+    ((left x) (left (funcall f x)))
+    ((right x) (right (funcall f x)))))
