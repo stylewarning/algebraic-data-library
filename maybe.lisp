@@ -13,3 +13,8 @@
   (adt:match maybe maybe-val
     ((just x) x)
     (nothing  or-else)))
+
+(defmethod fmap ((f function) (val maybe))
+  (adt:match maybe val
+    ((just x) (just (funcall f x)))
+    (nothing nothing)))

@@ -4,6 +4,11 @@
 (defpackage #:algebraic-data-library
   (:use #:cl)
   (:nicknames #:adl)
+  
+  ;; generics.lisp
+  (:export #:fmap
+           #:fmap*)
+  
   ;; unit.lisp
   (:export #:unit
            #:nul)
