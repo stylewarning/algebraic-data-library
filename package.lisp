@@ -7,7 +7,11 @@
   
   ;; generics.lisp
   (:export #:fmap
-           #:fmap*)
+           #:fmap*
+           
+           #:wrap
+           #:>>=
+           #:>>)
   
   ;; unit.lisp
   (:export #:unit
