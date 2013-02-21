@@ -43,8 +43,3 @@ if MAYBE-VAL is NOTHING."
     ((just x) (funcall f x))
     (nothing  nothing)))
 
-(defmethod >> ((a maybe) (b maybe))
-  (funcall (lambda (ignored)
-             (declare (ignore ignored))
-             b)
-           a))
