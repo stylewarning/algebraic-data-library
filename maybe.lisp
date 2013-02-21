@@ -16,7 +16,7 @@ if MAYBE-VAL is NOTHING."
     ((just x) x)
     (nothing  or-else)))
 
-(defun lookup (hash-table value)
+(defun lookup (value hash-table)
   "A type-safe version of GETHASH."
   (multiple-value-bind (result found?)
       (gethash value hash-table)
@@ -24,7 +24,27 @@ if MAYBE-VAL is NOTHING."
         (just result)
         nothing)))
 
+;;; Functors
+
 (defmethod fmap ((f function) (val maybe))
   (adt:match maybe val
     ((just x) (just (funcall f x)))
     (nothing nothing)))
+
+
+;;; Monads
+
+(defmethod wrap ((x (eql 'maybe)) value)
+  (just value))
+
+(defmethod >>= ((val maybe) f)
+  ;; F :: a -> Maybe a
+  (adt:match maybe val
+    ((just x) (funcall f x))
+    (nothing  nothing)))
+
+(defmethod >> ((a maybe) (b maybe))
+  (funcall (lambda (ignored)
+             (declare (ignore ignored))
+             b)
+           a))
