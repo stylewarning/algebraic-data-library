@@ -28,3 +28,7 @@
 
 (defgeneric >> (a b)
   (:documentation "Compute A and then B, discarding A."))
+
+;;; Default implementation
+(defmethod >> (a b)
+  (funcall (constantly b) a))
