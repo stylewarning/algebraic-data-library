@@ -18,6 +18,7 @@
            #:just
            #:nothing
            
+           #:lookup
            #:just-or-else)
   
   ;; either.lisp
