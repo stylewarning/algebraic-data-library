@@ -16,10 +16,11 @@ if MAYBE-VAL is NOTHING."
     ((just x) x)
     (nothing  or-else)))
 
-(defun lookup (value hash-table)
-  "A type-safe version of GETHASH."
+(defun lookup (key hash-table)
+  "A type-safe version of GETHASH. Look up the key KEY in the hash
+table HASH-TABLE."
   (multiple-value-bind (result found?)
-      (gethash value hash-table)
+      (gethash key hash-table)
     (if found?        
         (just result)
         nothing)))
