@@ -11,7 +11,8 @@
            
            #:wrap
            #:>>=
-           #:>>)
+           #:>>
+           #:mlet)
   
   ;; unit.lisp
   (:export #:unit

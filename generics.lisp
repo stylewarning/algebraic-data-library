@@ -1,5 +1,5 @@
 ;;;; generics.lisp
-;;;; Copyright (c) 2013 Robert Smith
+;;;; Copyright (c) 2013-2018 Robert Smith
 
 ;;;; Generic functions that correspond to type classes in Haskell.
 
@@ -32,3 +32,12 @@
 ;;; Default implementation
 (defmethod >> (a b)
   (funcall (constantly b) a))
+
+(defmacro mlet (bindings &body body)
+  "Similar to Haskell's `do' notation, allows for `>>=' to be chained together."
+  (if (null bindings)
+      `(progn ,@body)
+      (destructuring-bind ((variable value-form) . rest-bindings)
+          bindings
+        (check-type variable symbol)
+        `(>>= ,value-form (lambda (,variable) (mlet ,rest-bindings ,@body))))))
